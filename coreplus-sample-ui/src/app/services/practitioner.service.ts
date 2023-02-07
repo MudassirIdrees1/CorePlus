@@ -8,14 +8,14 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentService {
+export class PractitionerService {
 
 
   constructor(public http: HttpClient, private datePipe: DatePipe,) {
   }
 
-  GetAllGroup() {
-    let url = 'GetAllGroup/';
+  GetAll() {
+    let url = 'Practitioner';
 
     return this.http.get<any>(environment.apiURL + url)
       .pipe(map(data => { return data; }),
@@ -23,12 +23,8 @@ export class AppointmentService {
       );
   }
 
-  GetGroupById(PracId: number, FromDate: Date, ToDate: Date, IsAll: boolean): Observable<any> {
-
-    var fromDate = this.datePipe.transform(FromDate, 'dd-MMM-yyyy');
-    var toDate = this.datePipe.transform(ToDate, 'dd-MMM-yyyy');
-
-    let url = 'GetGroupById/' + PracId + '/' + fromDate + '/' + toDate + '/' + IsAll;
+  GetSupervisor() {
+    let url = 'supervisors';
 
     return this.http.get<any>(environment.apiURL + url)
       .pipe(map(data => { return data; }),
@@ -36,15 +32,14 @@ export class AppointmentService {
       );
   }
 
-  GetByID(PracId: number): Observable<any> {
-    let url = 'GetByID/' + PracId;
+  GetBelow() {
+    let url = 'belowSupervisors';
 
     return this.http.get<any>(environment.apiURL + url)
       .pipe(map(data => { return data; }),
         catchError((error) => { return throwError(error.message); })
       );
   }
-
 
 }
 

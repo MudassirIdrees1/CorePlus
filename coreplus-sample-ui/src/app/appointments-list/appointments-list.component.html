@@ -1,64 +1,119 @@
-<!-- 
-<mat-form-field style="width: 100%;padding: 2px">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-</mat-form-field> -->
+<form [formGroup]="form">
+  <mat-card>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" >
+      <div fxLayout="column" fxFlex="95%">
+        <mat-form-field>
+          <mat-label>Practitioner</mat-label>
+          <mat-select formControlName="TypeId" (selectionChange)="onChangeType($event.value)">
+            <mat-option id = "1" [value]="1">Supervisor & Above</mat-option>
+            <mat-option id = "2" [value]="2">Below Supervisor</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="4%">
+        <mat-checkbox formControlName="IsAllType" style="margin-top: 13px;" (change)="onCheckboxType($event)">
+            All 
+        </mat-checkbox>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="space-between" >
+      <div fxLayout="column" fxFlex="95%">
+        <mat-form-field>
+          <mat-label>Practitioner</mat-label>
+          <mat-select formControlName="PracId">
+            <mat-option *ngFor="let item of PractitionerList" [value]="item.id">
+              {{item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="4%">
+        <mat-checkbox formControlName="IsAllPrac" style="margin-top: 13px;"  (change)="onCheckboxPrac($event)">
+            All 
+        </mat-checkbox>
+    </div>
+  </div>
 
 
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
 
-<ngx-datatable
-      #table
-      class="material striped cell-border"
-      [loadingIndicator]="loadingIndicator"
-      [headerHeight]="50"
-      [limit]="20"
-      [columnMode]="columnMode.force"
-      [footerHeight]="50"
-      
-      [rows]="AppointmentList"
-      [scrollbarH]="true"
-    >
-    <!-- rowHeight="40" -->
+      <div fxLayout="column" fxFlex="47%">
+          <mat-form-field>
+              <input matInput [matDatepicker]="picker1" placeholder="Date From" formControlName="fromDate"
+                  (click)="picker1.open()" >
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+      </div>
 
-  <ngx-datatable-column name="Id" >
+      <div fxLayout="column" fxFlex="47%">
+          <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="Date To" formControlName="toDate" 
+                  (click)="picker2.open()" >
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+      </div>
+
+      <div fxLayout="column" fxFlex="4%">
+        <mat-checkbox formControlName="IsAllDate" style="margin-top: 13px;" (change)="onCheckboxDate($event)">
+            All 
+        </mat-checkbox>
+    </div>
+  </div>
+  
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div fxLayout="column" fxFlex="8%">
+      <button color="primary" style="margin-right: 5px;" type="button" 
+           (click)="getGroupById()" > Load Data
+      </button>
+  </div>
+  
+  </div>
+  
+  </mat-card>
+</form>
+
+<hr />
+
+<mat-card>
+
+  <ngx-datatable #table class="material striped cell-border" [loadingIndicator]="loadingIndicator" [headerHeight]="50"
+  [limit]="20" [columnMode]="columnMode.force" [footerHeight]="50" [rows]="AppointmentList" [scrollbarH]="true">
+
+  <ngx-datatable-column name="Practitioner">
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.practitioner_id}}
+      {{ getNameByID(row.practitioner_id) }}
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column name="Cost" >
+  <ngx-datatable-column name="Cost">
     <ng-template let-row="row" ngx-datatable-cell-template>
       {{row.cost}}
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column name="Revenue" >
+  <ngx-datatable-column name="Revenue">
     <ng-template let-row="row" ngx-datatable-cell-template>
       {{row.revenue}}
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column name="Month" >
+  <ngx-datatable-column name="Month">
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.Month}}
+      {{row.month}}
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column name="Year" >
+  <ngx-datatable-column name="Year">
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.Year}}
+      {{row.year}}
     </ng-template>
   </ngx-datatable-column>
 
-  <!-- <ngx-datatable-column name="Date" [minWidth]="200">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row.date | date:'medium' }}
-    </ng-template>
-  </ngx-datatable-column> -->
-
-  <ngx-datatable-column name="Client" >
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.client_name}}
-    </ng-template>
-  </ngx-datatable-column>
 
 </ngx-datatable>
+
+</mat-card>

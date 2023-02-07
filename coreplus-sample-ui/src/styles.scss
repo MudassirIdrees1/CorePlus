@@ -1,6 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
+
+// @import '~@swimlane/ngx-datatable/index.css';
+// @import '~@swimlane/ngx-datatable/themes/bootstrap.scss';
+// @import '~@swimlane/ngx-datatable/themes/material.scss';
+// @import '~@swimlane/ngx-datatable/themes/dark.scss';
+// @import '~@swimlane/ngx-datatable/assets/icons.css';
+
+// // // ngx - Data Table
+// @import '~@swimlane/ngx-datatable/index.css';
+// @import '~@swimlane/ngx-datatable/themes/material.css';
+// @import '~@swimlane/ngx-datatable/assets/icons.css';
 
 /* Provide sufficient contrast against white background */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 a {
     color: #0366d6;
   }
@@ -14,4 +27,5 @@ a {
     background-color: #1b6ec2;
     border-color: #1861ac;
   }
-  
+
+
