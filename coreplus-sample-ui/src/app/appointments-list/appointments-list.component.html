@@ -1,1 +1,64 @@
-<p>appointments-list works!</p>
+<!-- 
+<mat-form-field style="width: 100%;padding: 2px">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field> -->
+
+
+
+<ngx-datatable
+      #table
+      class="material striped cell-border"
+      [loadingIndicator]="loadingIndicator"
+      [headerHeight]="50"
+      [limit]="20"
+      [columnMode]="columnMode.force"
+      [footerHeight]="50"
+      
+      [rows]="AppointmentList"
+      [scrollbarH]="true"
+    >
+    <!-- rowHeight="40" -->
+
+  <ngx-datatable-column name="Id" >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.practitioner_id}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Cost" >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.cost}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Revenue" >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.revenue}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Month" >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.Month}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Year" >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.Year}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- <ngx-datatable-column name="Date" [minWidth]="200">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.date | date:'medium' }}
+    </ng-template>
+  </ngx-datatable-column> -->
+
+  <ngx-datatable-column name="Client" >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.client_name}}
+    </ng-template>
+  </ngx-datatable-column>
+
+</ngx-datatable>

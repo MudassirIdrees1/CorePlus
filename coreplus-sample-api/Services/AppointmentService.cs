@@ -29,7 +29,7 @@ namespace Coreplus.Sample.Api.Services
                         group.Key.Year
                     ));
 
-            return result;
+            return (IEnumerable<AppointmentGroup>)result;
             
         }
 

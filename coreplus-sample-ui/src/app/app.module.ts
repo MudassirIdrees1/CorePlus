@@ -11,6 +11,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AppointmentsListComponent } from './appointments-list/appointments-list.component';
 import { AppointmentService } from './services/appointment.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { RouterModule } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -23,11 +25,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     BrowserAnimationsModule,
     NgxDatatableModule,
 
-    ToastrModule.forRoot({
-      progressBar: true
-    }),
+    ToastrModule.forRoot({ progressBar: true }),
+    RouterModule.forRoot([
+      { path: '', component: AppointmentsListComponent },
+      { path: 'appointment', component: AppointmentsListComponent },
+      //{ path: 'dept', component: DepartmentComponent, canActivate:[AuthGuard]},
+    ])
   ],
-  providers: [AppointmentService],
+  providers: [DatePipe, AppointmentService],
   bootstrap: [AppComponent],
   declarations: [AppComponent, NavMenuComponent, AppointmentsListComponent],
 })
