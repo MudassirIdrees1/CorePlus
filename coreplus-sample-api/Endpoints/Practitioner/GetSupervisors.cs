@@ -14,4 +14,15 @@ public static class GetSupervisors
 
         return group;
     }
+
+    public static RouteGroupBuilder MapGetBelowSupervisorPractitioners(this RouteGroupBuilder group)
+    {
+        group.MapGet("/belowSupervisors", async (PractitionerService practitionerService) =>
+        {
+            var practitioners = await practitionerService.GetSupervisorPractitioners();
+            return Results.Ok(practitioners);
+        });
+
+        return group;
+    }
 }
