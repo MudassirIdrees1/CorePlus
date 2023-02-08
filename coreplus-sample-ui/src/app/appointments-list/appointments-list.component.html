@@ -4,10 +4,10 @@
     <div fxLayout="row wrap" fxLayoutAlign="space-between" >
       <div fxLayout="column" fxFlex="95%">
         <mat-form-field>
-          <mat-label>Practitioner</mat-label>
+          <mat-label>Practitioner Type</mat-label>
           <mat-select formControlName="TypeId" (selectionChange)="onChangeType($event.value)">
-            <mat-option id = "1" [value]="1">Supervisor & Above</mat-option>
-            <mat-option id = "2" [value]="2">Below Supervisor</mat-option>
+            <mat-option id = "1" [value]="1">Admin or Owner</mat-option>
+            <mat-option id = "2" [value]="2">Supervisor</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -85,7 +85,11 @@
 
   <ngx-datatable-column name="Practitioner">
     <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ getNameByID(row.practitioner_id) }}
+
+      <a style="color: #337ab7; cursor: pointer; padding-top: 2px;" routerLink="/practitioner/{{ row.practitioner_id }}">
+        {{ getNameByID(row.practitioner_id) }}
+      </a>
+
     </ng-template>
   </ngx-datatable-column>
 

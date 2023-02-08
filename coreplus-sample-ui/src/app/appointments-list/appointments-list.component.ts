@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, AbstractControl } from '@angular/forms';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { Appointment } from '../models/Appointment';
 import { AppointmentService } from '../services/appointment.service';
@@ -21,10 +21,7 @@ export class AppointmentsListComponent {
   form!: UntypedFormGroup;
 
   public PractitionerList  : Array<any> = [];
-  public PractitionerListAll  : Array<any> = [];
-
   public AppointmentList   : Array<Appointment> = [];
-  public AppointmentListAll: Array<Appointment> = [];
 
   constructor(
     public datePipe: DatePipe, 
@@ -69,27 +66,15 @@ export class AppointmentsListComponent {
     this.prtSrv.GetAll().subscribe(res=>{
       if (res.length>0) {
          this.PractitionerList = res;
-         this.PractitionerListAll = res;
       }
       else {
         console.log("Error : " + res.statusCode + ":" + res.exceptionMessage);
       }
     });
 
-    // this.service.GetAllGroup().subscribe(res=>{
-    //   if (res.length>0) {
-    //      this.AppointmentList = res;
-    //      this.AppointmentListAll = res;
-    //   }
-    //   else {
-    //     console.log("Error : " + res.statusCode + ":" + res.exceptionMessage);
-    //   }
-    // });
-
   }
 
   getGroupById(){
-    debugger
     var res = this.form.value;
 
     if(res.PracId > 0){
@@ -98,7 +83,6 @@ export class AppointmentsListComponent {
       this.service.GetGroupById(res.PracId, frmDate, toDate, res.IsAllDate).subscribe(res=>{
         if (res.length>0) {
            this.AppointmentList = res;
-           this.AppointmentListAll = res;
         }
         else {
           console.log("Error : " + res.statusCode + ":" + res.exceptionMessage);
@@ -109,7 +93,6 @@ export class AppointmentsListComponent {
       this.service.GetAllGroup().subscribe(res=>{
         if (res.length>0) {
            this.AppointmentList = res;
-           this.AppointmentListAll = res;
         }
         else {
           console.log("Error : " + res.statusCode + ":" + res.exceptionMessage);
@@ -121,7 +104,7 @@ export class AppointmentsListComponent {
   }
 
   getNameByID(ID: any) {
-    return this.PractitionerListAll.filter(o => o.id == ID)[0].name;
+    return this.PractitionerList.filter(o => o.id == ID)[0].name;
   }
 
 
