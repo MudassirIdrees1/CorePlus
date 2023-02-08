@@ -1,0 +1,50 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+
+
+<form [formGroup]="itemForm" >
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+  
+      
+      <div fxFlex="50" class="pr-16">
+        <mat-form-field class="full-width">
+          <input matInput type="text" name="date" formControlName="date" placeholder="Date">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50" class="pr-16">
+        <mat-form-field class="full-width">
+          <input matInput type="text" name="client_name" formControlName="client_name" placeholder="Client Name">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50" class="pr-16">
+        <mat-form-field class="full-width">
+          <input matInput name="duration" formControlName="duration" placeholder="Duration">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50" class="pr-16">
+        <mat-form-field class="full-width">
+          <input matInput type="text" name="cost" formControlName="cost" placeholder="Cost">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50" class="pr-16">
+          <mat-form-field class="full-width">
+            <input matInput type="text" name="revenue" formControlName="revenue" placeholder="Revenue">
+          </mat-form-field>
+        </div>
+    
+        <div fxFlex="50" class="pr-16">
+          <mat-form-field class="full-width">
+            <input matInput name="appointment_type" formControlName="appointment_type" placeholder="Appointment Type">
+          </mat-form-field>
+        </div>
+  
+  
+      <div fxFlex="100" class="mt-16">
+        <span fxFlex></span>
+        <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+      </div>
+    </div>
+  </form>
