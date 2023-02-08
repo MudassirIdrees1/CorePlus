@@ -22,6 +22,25 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatBadgeModule } from "@angular/material/badge";
+import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatRippleModule, MatNativeDateModule } from "@angular/material/core";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatTreeModule } from "@angular/material/tree";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSliderModule } from "@angular/material/slider";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +53,11 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { PractitionerDataComponent } from './practitioner-data/practitioner-data.component';
+import { AppointmentDetailPopupComponent } from './appointment-detail-popup/appointment-detail-popup.component';
+
+
+
 
 class CustomDateAdapter extends MomentDateAdapter {
   override getDayOfWeekNames(style: 'long' | 'short' | 'narrow') { return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; }
@@ -83,10 +107,35 @@ export const MATERIAL_DATEPICKER_FORMATS = {
     MatSortModule,
     MatTableModule,
 
+
+
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatTreeModule,
+    MatRippleModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatDividerModule,
+
+
     //ToastrModule.forRoot({ progressBar: true }),
     RouterModule.forRoot([
       ///{ path: '', component: AppointmentsListComponent },
       { path: 'appointment', component: AppointmentsListComponent },
+      { path: 'practitioner/:id', component: PractitionerDataComponent },
     ])
     
   ],
@@ -98,6 +147,6 @@ export const MATERIAL_DATEPICKER_FORMATS = {
 
   ],
   bootstrap: [AppComponent],
-  declarations: [AppComponent, NavMenuComponent, AppointmentsListComponent],
+  declarations: [AppComponent, NavMenuComponent, AppointmentsListComponent, PractitionerDataComponent, AppointmentDetailPopupComponent],
 })
 export class AppModule { }

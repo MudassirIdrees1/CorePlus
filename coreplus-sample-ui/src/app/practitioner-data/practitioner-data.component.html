@@ -1,0 +1,98 @@
+
+<h1>{{title}}</h1>
+  
+<h4>Summary</h4>
+<mat-card>
+
+    <ngx-datatable #table class="material striped cell-border" [loadingIndicator]="loadingIndicator" [headerHeight]="50"
+    [limit]="20" [columnMode]="columnMode.force" [footerHeight]="50" [rows]="AppointmentSummary" [scrollbarH]="true">
+  
+    <ngx-datatable-column name="Practitioner">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+
+        {{ getNameByID(row.practitioner_id) }}
+
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="Cost">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.cost}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="Revenue">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.revenue}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="Month">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.month}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="Year">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.year}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+  
+  </ngx-datatable>
+  
+  </mat-card>
+
+  <hr />
+  
+  <h4>Detail</h4>
+  <mat-card>
+  
+    <ngx-datatable #table class="material striped cell-border" [loadingIndicator]="loadingIndicator" [headerHeight]="50"
+    [limit]="20" [columnMode]="columnMode.force" [footerHeight]="50" [rows]="AppointmentList" [scrollbarH]="true">
+
+    <ngx-datatable-column name="date">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.date | date:'MMM-dd-YYYY'}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="client_name">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.client_name}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="appointment_type">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        
+        <a style="color: #337ab7; cursor: pointer; padding-top: 2px;" (click)="openPopUp(row)">
+            {{ row.appointment_type }}
+        </a>
+
+      </ng-template>
+    </ngx-datatable-column>
+  
+    <ngx-datatable-column name="duration">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.duration}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="revenue">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.revenue}}
+        </ng-template>
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="cost">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.cost}}
+        </ng-template>
+      </ngx-datatable-column>
+  
+  </ngx-datatable>
+  
+  </mat-card>
+  
