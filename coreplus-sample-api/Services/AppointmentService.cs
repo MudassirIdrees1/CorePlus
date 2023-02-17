@@ -1,4 +1,6 @@
 ﻿using Coreplus.Sample.Api.Types;
+using System.Globalization;
+using System;
 using System.Text.Json;
 
 namespace Coreplus.Sample.Api.Services
@@ -19,7 +21,7 @@ namespace Coreplus.Sample.Api.Services
 
             
             var result = data.AsEnumerable()
-                    .GroupBy(g => new { g.practitioner_id, Convert.ToDateTime(g.date).Month, Convert.ToDateTime(g.date).Year })
+                    .GroupBy(g => new { g.practitioner_id, Month = ParseDateTime(g.date).Month, Year = ParseDateTime(g.date).Year })
                     .Select(group => new AppointmentGroup(
 
                         group.Sum(x => x.revenue),
@@ -44,9 +46,10 @@ namespace Coreplus.Sample.Api.Services
 
             if (IsAllDates)
             {
+                
                 var result = data.AsEnumerable()
                       .Where(x => x.practitioner_id == prac_id)
-                      .GroupBy(g => new { g.practitioner_id, Convert.ToDateTime(g.date).Month, Convert.ToDateTime(g.date).Year })
+                      .GroupBy(g => new { g.practitioner_id, ParseDateTime(g.date).Month, ParseDateTime(g.date).Year })
                       .Select(group => new AppointmentGroup(
 
                           group.Sum(x => x.revenue),
@@ -62,8 +65,8 @@ namespace Coreplus.Sample.Api.Services
             {
                 var result = data.AsEnumerable()
                       .Where(x => x.practitioner_id == prac_id 
-                                        && Convert.ToDateTime(x.date) >= DateFrom && Convert.ToDateTime(x.date) <= DateTo)
-                      .GroupBy(g => new { g.practitioner_id, Convert.ToDateTime(g.date).Month, Convert.ToDateTime(g.date).Year })
+                                        && ParseDateTime(x.date) >= DateFrom && ParseDateTime(x.date) <= DateTo)
+                      .GroupBy(g => new { g.practitioner_id, ParseDateTime(g.date).Month, ParseDateTime(g.date).Year })
                       .Select(group => new AppointmentGroup(
 
                           group.Sum(x => x.revenue),
@@ -91,6 +94,16 @@ namespace Coreplus.Sample.Api.Services
 
             return data.Where(x => x.practitioner_id == prac_id).Select(prac => prac);
 
+        }
+
+        public static DateTime ParseDateTime(string val) 
+        {
+            DateTime dateTime;
+            if (DateTime.TryParseExact(val, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+            {
+            }
+
+            return dateTime;
         }
     }
 }
